@@ -33,3 +33,4 @@ def land_raw_hour() -> str:
     size_mb = os.path.getsize(config.LANDING_FILE) / 1_000_000
     print(f"[landing] saved {os.path.basename(config.LANDING_FILE)} ({size_mb:.0f} MB)")
     return config.LANDING_FILE
+land_raw_hour()
