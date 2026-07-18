@@ -17,6 +17,7 @@ def main() -> None:
     landing.land_raw_hour()
 
     bronze_df = bronze.build_bronze()
+    print(bronze_df.dtypes)
 
     silver_df = silver.build_silver(bronze_df)
     silver.write_silver_partitioned(silver_df)
