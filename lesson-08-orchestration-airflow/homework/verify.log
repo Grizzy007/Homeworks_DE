@@ -1,0 +1,66 @@
+==> Перевіряю DAG у: /c/Projects/Notebooks/Homeworks_DATA_ENGINEER/lesson-08-orchestration-airflow/homework
+==> Піднімаю стек (build + Postgres + init + scheduler + webserver)...
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 2B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/apache/airflow:2.10.5
+#3 ...
+
+#4 [auth] apache/airflow:pull token for registry-1.docker.io
+#4 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/apache/airflow:2.10.5
+#3 DONE 1.1s
+
+#5 [1/2] FROM docker.io/apache/airflow:2.10.5@sha256:6499a680a93463846d3a6be980e85d601dc97b0d81e82eed9ef5e5cb9da31b79
+#5 DONE 0.0s
+
+#6 [2/2] RUN pip install --no-cache-dir duckdb==1.1.3
+#6 CACHED
+
+#7 exporting to image
+#7 exporting layers done
+#7 writing image sha256:2afd26b2369d57b95068cd9250b6fd5a00582ff2d9a373bb58a85221aa3c6fc9 done
+#7 naming to docker.io/library/gh-airflow:2.10.5 done
+#7 DONE 0.1s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+Network homework_default  Creating
+Network homework_default  Created
+Volume "homework_pgdata"  Creating
+Volume "homework_pgdata"  Created
+Container homework-postgres-1  Creating
+Container homework-postgres-1  Created
+Container homework-airflow-init-1  Creating
+Container homework-airflow-init-1  Created
+Container homework-airflow-scheduler-1  Creating
+Container homework-airflow-webserver-1  Creating
+Container homework-airflow-webserver-1  Created
+Container homework-airflow-scheduler-1  Created
+Container homework-postgres-1  Starting
+Container homework-postgres-1  Started
+Container homework-postgres-1  Waiting
+Container homework-postgres-1  Healthy
+Container homework-airflow-init-1  Starting
+Container homework-airflow-init-1  Started
+Container homework-airflow-init-1  Waiting
+Container homework-airflow-init-1  Waiting
+Container homework-airflow-init-1  Exited
+Container homework-airflow-init-1  Exited
+Container homework-airflow-scheduler-1  Starting
+Container homework-airflow-webserver-1  Starting
+Container homework-airflow-scheduler-1  Started
+Container homework-airflow-webserver-1  Started
+==> Чекаю, поки scheduler розпарсить DAG...
+==> Перевіряю, що немає import errors...
+==> Перевіряю склад задач...
+==> Чистий DuckDB і перший прогін: airflow dags test ... 2024-01-14
+==> Після прогону 1: rows=172340, distinct event_type=5
+==> Повторний прогін того самого дня (перевірка ідемпотентності)...
+==> Після прогону 2: rows=172340
+PASS ✅  DAG піднявся, відпрацював і завантажив 172340 подій; повторний прогін не дублює дані.
