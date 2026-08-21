@@ -13,8 +13,7 @@
     mode="reschedule".
 """
 
-from __future__ import annotations
-
+import requests
 from airflow.sensors.base import BaseSensorOperator
 
 
@@ -24,5 +23,12 @@ class GHArchiveSensor(BaseSensorOperator):
         self.hour = hour
 
     def poke(self, context) -> bool:
-        # TODO: HEAD-запит до gharchive за context["ds"] і self.hour; True, якщо 200.
-        raise NotImplementedError("Реалізуйте GHArchiveSensor.poke — див. SPEC.md")
+        ds = context["ds"]
+        url = f"https://data.gharchive.org/{ds}-{self.hour}.json.gz"
+        try:
+            resp = requests.head(url, timeout=30)
+        except requests.RequestException as e:
+            self.log.warning(e)
+            return False
+        self.log.info(resp.status_code)
+        return resp.status_code == 200
