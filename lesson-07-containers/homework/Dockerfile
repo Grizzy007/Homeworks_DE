@@ -13,4 +13,25 @@
 # Перевірте збірку:  docker build -t gh-ingest:latest .
 # Скрипт app/gh_ingest.py — ДАНО, не редагуйте його.
 
-# TODO: реалізуйте Dockerfile тут.
+FROM python:3.12-slim
+
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+COPY app/requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+RUN useradd --create-home --uid 1000 appuser \
+    && mkdir -p /cache \
+    && chown -R appuser:appuser /cache
+
+COPY app/ ./
+RUN chown -R appuser:appuser /app
+
+USER appuser
+
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+    CMD python -c "import psycopg" || exit 1
+
+ENTRYPOINT ["python", "gh_ingest.py"]
