@@ -35,3 +35,4 @@ HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
     CMD python -c "import psycopg" || exit 1
 
 ENTRYPOINT ["python", "gh_ingest.py"]
+
