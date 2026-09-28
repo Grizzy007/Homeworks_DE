@@ -5,7 +5,6 @@
 -- Колонки: repo_name, issue_number, title, author_login, state, opened_at, closed_at,
 --          comments, label_names, comment_events_seen, last_event_at, hours_to_close
 
--- TODO: замініть заглушку на запит згідно зі SPEC.md
 with iss as (
     select
         repo_name, event_id, event_type,
@@ -42,6 +41,6 @@ select
     opened_at, closed_at, comments, label_names,
     comment_events_seen,
     event_at as last_event_at,
-    (unix_timestamp(closed_at) - unix_timestamp(opened_at)) / 3600.0 as hours_to_close
+    cast(((unix_timestamp(closed_at) - unix_timestamp(opened_at)) / 3600.0) as double) as hours_to_close
 from agg
 where rn = 1

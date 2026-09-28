@@ -6,7 +6,6 @@
 --          additions, deletions, churn, changed_files, commits_count, comments, review_comments,
 --          hours_open, label_count.
 
--- TODO: замініть заглушку на запит згідно зі SPEC.md
 select
     md5(concat_ws('|', repo_name, cast(pr_number as string))) as pr_id,
     md5(repo_name)                                  as repo_id,

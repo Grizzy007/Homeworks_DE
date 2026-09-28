@@ -6,7 +6,6 @@
 -- Колонки: activity_id (md5(concat_ws('|', repo_id, date_id))), repo_id, date_id, commits,
 --          distinct_committers, prs_opened, prs_merged, issues_opened, issues_closed, stars, forks.
 
--- TODO: замініть заглушку на запит згідно зі SPEC.md
 with unified as (
     select repo_name, cast(pushed_at as date) as day,
         count(*)                                             as commits,

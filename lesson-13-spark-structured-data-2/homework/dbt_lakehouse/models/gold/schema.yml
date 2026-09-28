@@ -1,7 +1,6 @@
 version: 2
 
 # Тести на Gold. Специфікація: ../../SPEC.md → «Тести».
-# Додайте not_null / unique на грануляцію / surrogate key кожної моделі.
 
 models:
   - name: dim_repo

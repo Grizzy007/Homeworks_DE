@@ -3,7 +3,6 @@
 -- Колонки: actor_id (md5(actor_login)), actor_login, is_bot (закінчується на [bot]),
 --          first_seen_at, last_seen_at, event_count, distinct_repos.
 
--- TODO: замініть заглушку на запит згідно зі SPEC.md
 select
     md5(actor_login)              as actor_id,
     actor_login,

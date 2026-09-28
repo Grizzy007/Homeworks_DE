@@ -4,7 +4,6 @@
 -- {{ ref('issues') }} (pushed_at / opened_at / merged_at / closed_at). Не хардкодьте.
 -- Колонки: date_id (int yyyyMMdd), date_day (date), day_of_week, is_weekend, iso_week, year.
 
--- TODO: замініть заглушку на запит згідно зі SPEC.md
 with all_dates as (
     select cast(pushed_at as date) as d from {{ ref('commits') }}
     union all select cast(opened_at as date) from {{ ref('pull_requests') }}

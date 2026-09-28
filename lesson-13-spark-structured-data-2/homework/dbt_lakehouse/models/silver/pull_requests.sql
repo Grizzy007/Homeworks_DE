@@ -5,7 +5,6 @@
 --          closed_at, merged_at, additions, deletions, changed_files, commits_count, comments,
 --          review_comments, author_association, label_names, last_action, last_event_at, churn, hours_open
 
--- TODO: замініть заглушку на запит згідно зі SPEC.md
 with pr as (
     select
         repo_name, event_id,
@@ -52,6 +51,6 @@ select
     additions, deletions, changed_files, commits_count, comments, review_comments,
     author_association, label_names, last_action, last_event_at,
     additions + deletions as churn,
-    (unix_timestamp(coalesce(closed_at, last_event_at)) - unix_timestamp(opened_at)) / 3600.0 as hours_open
+    cast(((unix_timestamp(coalesce(closed_at, last_event_at)) - unix_timestamp(opened_at)) / 3600.0) as double) as hours_open
 from ranked
 where rn = 1

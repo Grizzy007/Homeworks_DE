@@ -6,7 +6,6 @@
 --          is_distinct, pushed_at, is_merge_commit, message_subject, message_length
 -- Пастка: `distinct` — reserved word, у DDL-схемі та доступі до поля потрібні backticks.
 
--- TODO: замініть заглушку на запит згідно зі SPEC.md
 with push as (
     select
         event_id, repo_name,
